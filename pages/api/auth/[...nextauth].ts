@@ -10,7 +10,17 @@ export default NextAuth({
       clientId: "app",
       clientSecret: "scorpion",
       wellKnown: "http://localhost:3003/.well-known/openid-configuration",
-      authorization: { params: { scope: "openid email profile offline_access" } },
+      authorization: {
+        params: {
+          scope: "openid offline_access email profile",
+          prompt: "consent",
+        },
+      },
+      token: {
+        params: {
+          scope: "openid offline_access email profile",
+        },
+      },
       idToken: true,
       checks: ["pkce", "state"],
       profile(profile) {
