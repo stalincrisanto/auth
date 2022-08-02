@@ -10,6 +10,7 @@
   "homepage": "https://next-auth-example.vercel.app",
   "main": "",
   "scripts": {
+    "test":"test",
     "dev": "next",
     "build": "next build",
     "start": "next start",
