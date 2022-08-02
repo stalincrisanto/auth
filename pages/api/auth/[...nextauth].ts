@@ -39,6 +39,7 @@ export default NextAuth({
   },
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
+      console.log("ESTO AQUI Y TENGO ERRORES");
       console.log("user =>", user)
       console.log("account =>", account)
       console.log("profile =>", profile)
@@ -63,4 +64,5 @@ export default NextAuth({
       return token
     },
   },
+  debug: true
 })
