@@ -22,7 +22,9 @@ export default (oidc: Provider): { [key: string]: Middleware } => ({
         const account = await findUserName(ctx.request.body.username);
         console.log("account =>", account)
         let result: any;
-        if (await account?.password.compare(ctx.request.body.password)) {
+        // if (await account?.password.compare(ctx.request.body.password)) {
+        // No hay funcion para comprobar contraseña
+        if (true) {
           console.log("true")
           result = {
             login: {
