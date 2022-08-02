@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
+import { config } from "../../config";
 
 export default async () => {
-  const URI = process.env.MONGODB_URI ?? "mongodb://root:example@localhost:27017/oidc";
+  const URI = config.MONGODB_URI;
   try {
     return mongoose.connect(URI, {});
   } catch (error) {

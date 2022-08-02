@@ -1,4 +1,4 @@
-import dotenv from "dotenv";
+// import dotenv from "dotenv";
 import Koa from "koa";
 import render from "koa-ejs";
 import mount from "koa-mount";
@@ -9,30 +9,31 @@ import { oidc } from "./configs/provider";
 import connectMongodb from "./db/mongodb/connection";
 import router from "./routes";
 import logger from "koa-logger"
+import { config } from "./config";
 
-dotenv.config({ path: path.resolve("oidc/.env") });
+// dotenv.config({ path: path.resolve("oidc/.env") });
 
 const start = async () => {
   await connectMongodb();
 
   const app = new Koa();
-  render(app, {
+  render(app as any, {
     cache: false,
     viewExt: "ejs",
     layout: false,
     root: path.resolve("oidc/src/views"),
   });
 
-  const provider = oidc(process.env.ISSUER as string, configuration);
+  const provider = oidc(config.ISSUER as string, configuration);
   
   app.use(logger())
   app.use(koaStatic(path.resolve("../public")));
   app.use(router(provider).routes());
   app.use(mount(provider.app));
 
-  app.listen(process.env.PORT, () => {
+  app.listen(config.PORT, () => {
     console.log(
-      `oidc-provider listening on port ${process.env.PORT}, check http://localhost:${process.env.PORT}/.well-known/openid-configuration`
+      `oidc-provider listening on port ${config.PORT}, check http://localhost:${config.PORT}/.well-known/openid-configuration`
     );
   });
 };
