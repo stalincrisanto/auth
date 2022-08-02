@@ -15,7 +15,7 @@ export const configuration: Configuration = {
       const infoToReturn = account && {
         accountId: id,
         async claims(use /* id_token, userinfo */, scope, claims) {
-          // console.log(`claims(${use}, ${scope}, ${JSON.stringify(claims)})`);
+          console.log(`claims(${use}, ${scope}, ${JSON.stringify(claims)})`);
           console.log(`scopes => ${scope}`)
           if (!scope) return undefined;
           const openid = { sub: id };
